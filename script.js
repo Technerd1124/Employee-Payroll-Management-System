@@ -1,7 +1,7 @@
 
 function  OpenAdmin() {
 
-    document.location = "Dashboad/Admin_login.html"
+    document.location = "Dashboard/Admin_login.html"
     
 }
 

@@ -1,3 +1,9 @@
+
+<?php 
+
+
+
+?
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -80,13 +86,15 @@
     <div class="login-container">
         <i class="fa-solid fa-user-tie"></i>
         <h2>Admin Login</h2>
-        <form action="/backn/admin_login.php" method="post">
+        <form action="./" method="post">
             <input type="email" placeholder="Email" value="admin@gmail.com" required name="email">
             <input type="password" placeholder="Password" required name="AdminPassword">
             <br>
             <br>
-            <button type="submit">Log In</button>
+            <button type="submit"  onsubmit ="validate_admin()" >Log In</button>
         </form>
     </div>
+
+
+   <script src="../script.js"></script>
 </body>
-</html>

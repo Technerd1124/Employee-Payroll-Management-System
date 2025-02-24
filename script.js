@@ -1,12 +1,12 @@
 
 function OpenAdmin() {
-    document.location = "Dashboard/Admin_dashboard.html";
+    document.location = "Dashboard/admin_login.html";
 
     
 }
 
 function OpenEmployee(){
-    document.location = "Dashboard/Employee_Dashboard.html";
+    document.location = "Dashboard/emp_login.html";
 }
 
 

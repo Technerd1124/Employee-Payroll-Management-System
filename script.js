@@ -1,8 +1,8 @@
 function OpenAdmin() {
-  document.location = "Dashboard/admin_login.html";
+  document.location = "Admin/admin_login.html";
 }
 
 function OpenEmployee() {
-  document.location = "Dashboard/emp_login.html";
+  document.location = "Employee/emp_login.html";
 }
 

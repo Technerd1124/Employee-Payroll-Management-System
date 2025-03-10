@@ -83,7 +83,7 @@ session_start();
             margin-top: 15vh;
             text-align: center;
             width: 90vw;
-            height: 98vh;
+            height: 99vh;
             padding: 20px;
             background: rgba(255, 255, 255, 0.9);
             border-radius: 12px;
@@ -91,6 +91,7 @@ session_start();
         }
     </style>
 </head>
+
 
 <body>
 

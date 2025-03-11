@@ -102,7 +102,7 @@ session_start();
         <div>
             <a href="index.php?page=home">Home</a>
             <a href="index.php?page=dashboard">Dashboard</a>
-            <a href="index.php?page=profile"> Employees</a>
+            <a href="index.php?page=employee"> Employees</a>
         </div>
         <button class="logout" onclick="logout()">Logout</button>
     </div>
@@ -114,11 +114,11 @@ session_start();
         $page = isset($_GET['page']) ? $_GET['page'] : 'home';
 
         // Allowed pages
-        $allowed_pages = ['home', 'dashboard', 'profile'];
+        $allowed_pages = ['home', 'dashboard', 'employee'];
 
         // Include the corresponding page or show error
         if (in_array($page, $allowed_pages)) {
-            include "$page.php";
+            include "Tabs/$page.php";
         } else {
             echo "<h2>Page not found</h2>";
         }

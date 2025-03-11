@@ -87,6 +87,10 @@
         .login-container button:hover {
             background: linear-gradient(135deg, #2575fc, #6a11cb);
         }
+
+        #warning {
+            color: red;
+        }
     </style>
 </head>
 
@@ -95,17 +99,32 @@
     <div class="login-container">
         <i class="fa-solid fa-user-tie"></i>
         <h2>Admin Login</h2>
-        <form action="./" method="post">
-            <input type="email" placeholder="Email" value="admin@gmail.com"
-                required name="email">
-            <input type="password" placeholder="Password" required
-                name="AdminPassword">
+        <form method="post">
+            <input type="email" placeholder="Email" value="admin@gmail.com" name="email" required>
+            <input type="password" placeholder="Password" required name="AdminPassword">
             <br>
             <br>
-            <button type="submit" onsubmit="validate_admin()">Log
-                In</button>
+            <button type="button" onclick="validate_admin()">Log
+                In</button> 
+            <p id="warning"> </p>
         </form>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        function validate_admin() {
+            var mail = document.forms[0].email.value;
+            var adminPassword = document.forms[0].AdminPassword.value;
+            var error = document.getElementById("warning");
+
+            if (mail == "" && adminPassword == "") {
+                error.innerHTML = "Enter Both Feilds  ";
+            } else {
+                if (mail == "admin@gmail.com" && adminPassword == "admin24") {
+                    window.location = "index.php";
+                } else {
+                    error.innerHTML = " wrong details  ";
+                }
+            }
+        }
+    </script>
 </body>

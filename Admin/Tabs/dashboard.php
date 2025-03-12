@@ -1,117 +1,189 @@
 <?php
-include "./DB/config.php";
-// Function to Submit a Leave Request
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit_leave"])) {
-    $employee_id = $_POST["employee_id"];
-    $leave_type = $_POST["leave_type"];
-    $start_date = $_POST["start_date"];
-    $end_date = $_POST["end_date"];
-    $reason = $_POST["reason"];
+include '../DB/config.php';
 
-    $sql = "INSERT INTO leave_requests (employee_id, leave_type, start_date, end_date, reason, status) 
-            VALUES ('$employee_id', '$leave_type', '$start_date', '$end_date', '$reason', 'Pending')";
-
-    if ($conn->query($sql) === TRUE) {
-        echo "Leave request submitted successfully!";
-    } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
-    }
+// Handle Delete Request
+if (isset($_GET['delete'])) {
+    $delete_id = $_GET['delete'];
+    $conn->query("DELETE FROM payroll WHERE id = $delete_id");
+    header("Location: admin_payroll.php");
 }
 
-// Function to Update Leave Status
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["update_status"])) {
-    $leave_id = $_POST["leave_id"];
-    $status = $_POST["status"];
-
-    $sql = "UPDATE leave_requests SET status='$status' WHERE id='$leave_id'";
-
-    if ($conn->query($sql) === TRUE) {
-        echo "Leave status updated successfully!";
-    } else {
-        echo "Error updating record: " . $conn->error;
-    }
-}
-
-// Function to Delete Leave Request
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["delete_leave"])) {
-    $leave_id = $_POST["leave_id"];
-
-    $sql = "DELETE FROM leave_requests WHERE id='$leave_id'";
-
-    if ($conn->query($sql) === TRUE) {
-        echo "Leave request deleted!";
-    } else {
-        echo "Error deleting record: " . $conn->error;
-    }
-}
-
-// Fetch All Leave Requests
-$sql = "SELECT * FROM leave_requests ORDER BY id DESC";
+// Fetch payroll details
+$sql = "SELECT p.id, e.emp_name, p.employee_id, p.base_salary, p.bonus, p.deductions, p.total_salary, p.payment_status 
+        FROM payroll p 
+        JOIN employee e ON p.employee_id = e.id";
 $result = $conn->query($sql);
 ?>
 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Admin - Payroll Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .container {
+            width: 90%;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background: #2C3E50;
+            color: white;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .status-paid {
+            color: green;
+            font-weight: bold;
+        }
+
+        .status-unpaid {
+            color: red;
+            font-weight: bold;
+        }
+
+        .edit-btn,
+        .delete-btn {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            color: white;
+            font-size: 14px;
+        }
+
+        .edit-btn {
+            background: #3498db;
+        }
+
+        .delete-btn {
+            background: #e74c3c;
+        }
+
+        .edit-btn:hover {
+            background: #2980b9;
+        }
+
+        .delete-btn:hover {
+            background: #c0392b;
+        }
+
+        /* Form Styling */
+        .payroll-form {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        input,
+        select {
+            padding: 10px;
+            margin: 8px;
+            width: 200px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .submit-btn {
+            background: #27ae60;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .submit-btn:hover {
+            background: #219150;
+        }
+    </style>
+</head>
+
 <body>
 
-    <h2>Submit Leave Request</h2>
-    <form method="post">
-        Employee ID: <input type="number" name="employee_id" required><br>
-        Leave Type:
-        <select name="leave_type">
-            <option value="Sick Leave">Sick Leave</option>
-            <option value="Casual Leave">Casual Leave</option>
-            <option value="Paid Leave">Paid Leave</option>
-            <option value="Unpaid Leave">Unpaid Leave</option>
-        </select><br>
-        Start Date: <input type="date" name="start_date" required><br>
-        End Date: <input type="date" name="end_date" required><br>
-        Reason: <textarea name="reason"></textarea><br>
-        <button type="submit" name="submit_leave">Submit Leave</button>
-    </form>
+    <div class="container">
+        <h2>Admin - Payroll Management</h2>
 
-    <h2>All Leave Requests</h2>
-    <table border="1">
-        <tr>
-            <th>ID</th>
-            <th>Employee ID</th>
-            <th>Leave Type</th>
-            <th>Start Date</th>
-            <th>End Date</th>
-            <th>Reason</th>
-            <th>Status</th>
-            <th>Actions</th>
-        </tr>
-        <?php while ($row = $result->fetch_assoc()) { ?>
+        <table>
             <tr>
-                <td><?php echo $row["id"]; ?></td>
-                <td><?php echo $row["employee_id"]; ?></td>
-                <td><?php echo $row["leave_type"]; ?></td>
-                <td><?php echo $row["start_date"]; ?></td>
-                <td><?php echo $row["end_date"]; ?></td>
-                <td><?php echo $row["reason"]; ?></td>
-                <td><?php echo $row["status"]; ?></td>
-                <td>
-                    <form method="post" style="display:inline;">
-                        <input type="hidden" name="leave_id" value="<?php echo $row['id']; ?>">
-                        <select name="status">
-                            <option value="Pending">Pending</option>
-                            <option value="Approved">Approved</option>
-                            <option value="Rejected">Rejected</option>
-                        </select>
-                        <button type="submit" name="update_status">Update</button>
-                    </form>
-                    <form method="post" style="display:inline;">
-                        <input type="hidden" name="leave_id" value="<?php echo $row['id']; ?>">
-                        <button type="submit" name="delete_leave" onclick="return confirm('Are you sure?');">Delete</button>
-                    </form>
-                </td>
+                <th>Payroll ID</th>
+                <th>Employee</th>
+                <th>Employee ID</th>
+                <th>Base Salary</th>
+                <th>Bonus</th>
+                <th>Deductions</th>
+                <th>Total Salary</th>
+                <th>Status</th>
+                <th>Action</th>
             </tr>
-        <?php } ?>
-    </table>
+            <?php while ($row = $result->fetch_assoc()) { ?>
+                <tr>
+                    <td><?php echo $row['id']; ?></td>
+                    <td><?php echo htmlspecialchars($row['emp_name']); ?></td>
+                    <td><?php echo $row['employee_id']; ?></td>
+                    <td><?php echo number_format($row['base_salary'], 2); ?></td>
+                    <td><?php echo number_format($row['bonus'], 2); ?></td>
+                    <td><?php echo number_format($row['deductions'], 2); ?></td>
+                    <td><?php echo number_format($row['total_salary'], 2); ?></td>
+                    <td class="<?php echo ($row['payment_status'] == 'Paid') ? 'status-paid' : 'status-unpaid'; ?>">
+                        <?php echo $row['payment_status']; ?>
+                    </td>
+                    <td>
+                        <a href="edit_payroll.php?id=<?php echo $row['id']; ?>" class="edit-btn">Edit</a>
+                        <a href="admin_payroll.php?delete=<?php echo $row['id']; ?>" class="delete-btn" onclick="return confirm('Are you sure?')">Delete</a>
+                    </td>
+                </tr>
+            <?php } ?>
+        </table>
+
+        <!-- Add Payroll Form -->
+        <div class="payroll-form">
+            <h3>Add Payroll</h3>
+            <form action="add_payroll.php" method="POST">
+                <input type="text" name="employee_id" placeholder="Employee ID" required>
+                <input type="text" name="base_salary" placeholder="Base Salary" required>
+                <input type="text" name="bonus" placeholder="Bonus">
+                <input type="text" name="deductions" placeholder="Deductions">
+                <select name="payment_status" required>
+                    <option value="Paid">Paid</option>
+                    <option value="Unpaid">Unpaid</option>
+                </select>
+                <br>
+                <button type="submit" class="submit-btn">Add Payroll</button>
+            </form>
+        </div>
+    </div>
 
 </body>
 
 </html>
-
-<?php
-$conn->close();
-?>

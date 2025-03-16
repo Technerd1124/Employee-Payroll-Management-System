@@ -49,7 +49,7 @@
         </center>
     </header>
 
-    <form id="employeeForm" action="Employee/empdash.php" method="post">
+    <form id="employeeForm" action="../Employee/add-emp.php" method="post">
         <input type="text" id="empname" name="empname" placeholder="Employee Name">
         <span class="error" id="nameError"></span>
 

@@ -3,7 +3,7 @@ function OpenAdmin() {
   document.location = "Admin/Admin_log.html";
 }
 function OpenEmployee() {
-  document.location = "Employee/emp_login.html";
+  document.location = "Employee/login.php";
 }
 
 /// Validation  Codes
@@ -26,7 +26,6 @@ function validate_admin() {
 }
 
 // 2. Employee Login  Validition
-
 function validate_emp() {
   var mail = document.forms[1].email.value;
   var empPassword = document.forms[1].EmpPassword.value;

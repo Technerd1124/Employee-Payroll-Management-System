@@ -1,0 +1,72 @@
+.box {
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    width: 380px;
+    max-width: 90%;
+    margin: 20px auto;
+    text-align: center;
+  }
+  
+  h2 {
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 22px;
+  }
+  
+  label {
+    font-weight: bold;
+    display: block;
+    margin-top: 10px;
+    text-align: left;
+    font-size: 14px;
+    color: #555;
+  }
+  
+  select,
+  input {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: 0.3s;
+  }
+  
+  input:focus,
+  select:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  }
+  
+  input[readonly] {
+    background-color: #f8f9fa;
+  }
+  
+  #paybtn {
+    background: #28a745;
+    color: white;
+    border: none;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+    transition: 0.3s;
+  }
+  
+  #paybtn:hover {
+    background: #218838;
+  }
+  
+  @media (max-width: 480px) {
+    .box {
+      width: 90%;
+      padding: 20px;
+    }
+  }
+  

@@ -19,12 +19,11 @@ session_start();
         <div class="logo"> Welcome Admin <br> </div>
         <div>
             <a href="admin_page.php?page=home">Home</a>
-            <a href="admin_page.php?page=dashboard">Dashboard</a>
+            <a href="admin_page.php?page=dashboard"> Manage Payroll </a>
             <a href="admin_page.php?page=employee"> Employees</a>
         </div>
         <button class="logout" onclick="logout()">Logout</button>
     </div>
-
     <div class="content">
         <!-- Dynamic Content Section -->
         <?php
@@ -43,10 +42,10 @@ session_start();
         ?>
 
     </div>
-
     <script>
         function logout() {
-            document.location = "logout.php";
+            // document.location = "../logout.php";
+            document.location = "./Admin_log.html";
         }
     </script>
 </body>

@@ -150,6 +150,7 @@ $emp_name = $row ? $row["emp_name"] : "Employee"; // Default to "Employee" if no
         } else {
             echo "<h2>Page not found</h2>";
         }
+
         ?>
     </div>
     <script>

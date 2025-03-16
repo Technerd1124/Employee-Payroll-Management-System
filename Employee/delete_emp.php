@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_param("i", $emp_id);
 
     if ($stmt->execute()) {
-        echo "<script>alert('Employee deleted successfully!'); window.location = '../index.php?page=employee' </script>";
+        echo "<script>alert('Employee deleted successfully!'); window.location = '../Admin/admin_page.php?page=employee' </script>";
     } else {
         echo "<script>alert('Error deleting record: " . $conn->error . "');</script>";
     }

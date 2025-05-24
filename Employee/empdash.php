@@ -146,7 +146,7 @@ $emp_name = $row ? $row["emp_name"] : "Employee"; // Default to "Employee" if no
         $allowed_pages = ['home', 'leave_req', 'payroll', 'profile'];
 
         if (in_array($page, $allowed_pages)) {
-            include "Tabs/$page.php"; // Ensure Tabs folder exists
+            include "./Tabs/$page.php"; // Ensure Tabs folder exists
         } else {
             echo "<h2>Page not found</h2>";
         }

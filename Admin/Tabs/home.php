@@ -65,7 +65,7 @@
         <span class="error" id="addressError"></span>
 
 
-        <input type="text" id="empsalary" name="empsalary" placeholder="Employee Salary">
+        <input type="text" id="empsalary" name="empsalary" placeholder="Employee Salary (Base Salary) ">
         <span class="error" id="salaryError"></span>
 
         <input type="submit" name="submit" value="Add Employee">

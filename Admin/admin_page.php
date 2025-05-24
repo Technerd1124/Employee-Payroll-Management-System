@@ -39,15 +39,23 @@ session_start();
         } else {
             echo "<h2>Page not found</h2>";
         }
-        ?>
 
-    </div>
-    <script>
-        function logout() {
-            // document.location = "../logout.php";
-            document.location = "./Admin_log.html";
-        }
-    </script>
+        ?>
+        <!-- <form>
+            <div class="boxofForm">
+                <label for="name"> Name </label>
+                <input type="text" id="Name">
+            </div>
+            <div class="boxofForm"></div>
+            <div class="boxofForm"></div>
+            <div class="boxofForm"></div>
+        </form> -->
+        <script>
+            function logout() {
+                // document.location = "../logout.php";
+                document.location = "../logout.php";
+            }
+        </script>
 </body>
 
 </html>

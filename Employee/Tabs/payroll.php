@@ -6,11 +6,11 @@ $sql = "SELECT p.id, e.emp_name, p.base_salary, p.bonus, p.deductions, p.total_s
         FROM payroll p 
         JOIN employee e ON p.employee_id = e.id";
 $result = $conn->query($sql);
+
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <title>Payroll</title>
     <style>
@@ -19,7 +19,6 @@ $result = $conn->query($sql);
             background-color: #f4f4f4;
             margin: 20px;
         }
-
         h2 {
             text-align: center;
         }

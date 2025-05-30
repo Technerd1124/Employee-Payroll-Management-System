@@ -24,7 +24,8 @@ $pdf->Cell(20, 10, 'Status', 1);
 $pdf->Ln();
 
 $pdf->SetFont('Arial', '', 10);
-while ($row = $result->fetch_assoc()) {
+while ($row = $result->fetch_assoc()) 
+{
     $pdf->Cell(20, 10, $row['id'], 1);
     $pdf->Cell(50, 10, $row['emp_name'], 1);
     $pdf->Cell(25, 10, $row['base_salary'], 1);

@@ -124,7 +124,7 @@ if (!$employee) {
                 <td><?php echo $employee['homeaddress']; ?></td>
             </tr>
         </table>
-        <a href=".././logout.php" class="logout-btn">Logout</a>
+        <a href=" .../logout.php" class="logout-btn">Logout</a>
     </div>
 
 </body>

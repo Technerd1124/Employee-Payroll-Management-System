@@ -155,7 +155,7 @@ $emp_name = $row ? $row["emp_name"] : "Employee"; // Default to "Employee" if no
     </div>
     <script>
         function logout() {
-            document.location = "logout.php";
+            document.location = "../logout.php";
         }
     </script>
 
